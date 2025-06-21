@@ -2,7 +2,10 @@
 name: Generate All Repo Stats
 
 on:
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+  # Runs the job automatically every Sunday at 05:00 UTC
   schedule:
     - cron: '0 5 * * 0'
 
@@ -10,7 +13,7 @@ jobs:
   build-and-commit:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: false # Ensures that if one repo fails, the others will still run.
       matrix:
         repo:
           # --- Your list of repositories ---
@@ -63,22 +66,16 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # --- THIS IS THE NEW STEP ---
-      # It replaces the '/' in the repo name with '_' and saves it to an environment variable.
       - name: Create sanitized repo name for directory path
         run: echo "SANITIZED_REPO_NAME=$(echo ${{ matrix.repo }} | sed 's/\//_/g')" >> $GITHUB_ENV
 
-      # This step now uses the environment variable created above.
       - name: Generate repo traffic stats
-        uses: jgehrcke/github-repo-stats@v2
+        # Using version v1.4.2 as requested.
+        uses: jgehrcke/github-repo-stats@v1.4.2
         with:
           github-token: ${{ secrets.GH_PAT }}
           repository: ${{ matrix.repo }}
-          
-          # --- THIS LINE IS CHANGED ---
-          # Use the sanitized name from the environment variable.
           svg-export-path: './stats-output/${{ env.SANITIZED_REPO_NAME }}/'
-          
           commit-message: 'docs: update repository traffic stats'
           commit-author-name: 'GitHub Actions'
           commit-author-email: 'actions@github.com'
