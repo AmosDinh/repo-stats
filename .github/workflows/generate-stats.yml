@@ -10,13 +10,16 @@ on:
     - cron: '0 5 * * 0'
 
 jobs:
-  build-and-commit:
+  run-ghrs-with-matrix:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false # Ensures that if one repo fails, the others will still run.
+      # Do not cancel other jobs if one fails.
+      fail-fast: false
+      # IMPORTANT: Run jobs one by one to avoid commit conflicts on the data branch.
+      max-parallel: 1
       matrix:
+        # The list of repositories to generate reports for.
         repo:
-          # --- Your list of repositories ---
           - 'AmosDinh/AmosDinh.github.io'
           - 'AmosDinh/bachelorthesis_security-research-graph-learning'
           - 'AmosDinh/BikePricePredict'
@@ -63,19 +66,11 @@ jobs:
           - 'AmosDinh/zed_settings'
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Create sanitized repo name for directory path
-        run: echo "SANITIZED_REPO_NAME=$(echo ${{ matrix.repo }} | sed 's/\//_/g')" >> $GITHUB_ENV
-
       - name: Generate repo traffic stats
-        # Using version v1.4.2 as requested.
+        # Using the official v1.4.2 release and its correct parameters
         uses: jgehrcke/github-repo-stats@v1.4.2
         with:
-          github-token: ${{ secrets.GH_PAT }}
+          # The repository to fetch stats for (from the matrix)
           repository: ${{ matrix.repo }}
-          svg-export-path: './stats-output/${{ env.SANITIZED_REPO_NAME }}/'
-          commit-message: 'docs: update repository traffic stats'
-          commit-author-name: 'GitHub Actions'
-          commit-author-email: 'actions@github.com'
+          # The correct parameter name for the token is 'ghtoken'
+          ghtoken: ${{ secrets.GH_PAT }}
