@@ -1,0 +1,90 @@
+# .github/workflows/generate-stats.yml
+name: Generate All Repo Stats
+
+# Controls when the action will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+  # Runs the job automatically every Sunday at 05:00 UTC
+  schedule:
+    - cron: '0 5 * * 0'
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    # This is the matrix strategy. It will run one job for each item in the `repo` list.
+    strategy:
+      fail-fast: false # IMPORTANT: Ensures that if one repo fails, the others will still run.
+      matrix:
+        repo:
+          # --- Your list of repositories ---
+          - 'AmosDinh/AmosDinh.github.io'
+          - 'AmosDinh/bachelorthesis_security-research-graph-learning'
+          - 'AmosDinh/BikePricePredict'
+          - 'AmosDinh/Bot-or-User_Twitter-Classification'
+          - 'AmosDinh/buildingGameBot'
+          - 'AmosDinh/CNNBirdseye'
+          - 'AmosDinh/colab_ssh'
+          - 'AmosDinh/coursera-deep-learning-specialization'
+          - 'AmosDinh/CryptoExchange_DataCollector_'
+          - 'AmosDinh/decimal_binary_converter'
+          - 'AmosDinh/diffusers'
+          - 'AmosDinh/FileSaver.js'
+          - 'AmosDinh/firecrawl'
+          - 'AmosDinh/Fitbit_SleepData_Analysis'
+          - 'AmosDinh/flvToMP4.py'
+          - 'AmosDinh/Gallery_js'
+          - 'AmosDinh/Generative_Clothes2Person'
+          - 'AmosDinh/GNNpapersearch'
+          - 'AmosDinh/GNNTwitteranalysis'
+          - 'AmosDinh/GoogleAiStudio_SetSystemInstructionsAutomatically'
+          - 'AmosDinh/googleSearcher'
+          - 'AmosDinh/GraphStructureLearning'
+          - 'AmosDinh/HDFS_python_demo'
+          - 'AmosDinh/IceCreamEmpire_S4'
+          - 'AmosDinh/jRDF2Vec'
+          - 'AmosDinh/L1B3RT45'
+          - 'AmosDinh/langchain'
+          - 'AmosDinh/MachineLearningCourse'
+          - 'AmosDinh/Mandelbrot'
+          - 'AmosDinh/markdown2png'
+          - 'AmosDinh/MultiLayerPerceptron'
+          - 'AmosDinh/NeuroEvolution_NEAT'
+          - 'AmosDinh/node_fontviewer'
+          - 'AmosDinh/ov7670_VGA_color_SD_card_timelapse'
+          - 'AmosDinh/pytorch_geometric'
+          - 'AmosDinh/Reinforce_TrainReScheduling'
+          - 'AmosDinh/Scrapegraph-ai'
+          - 'AmosDinh/Skill_Job_GNN'
+          - 'AmosDinh/snake'
+          - 'AmosDinh/StableCascadeInference'
+          - 'AmosDinh/StableDiffusion_Chairs'
+          - 'AmosDinh/tictactoAlgo'
+          - 'AmosDinh/WebProgramming-Project-Semester3'
+          - 'AmosDinh/zed_settings'
+
+    steps:
+      # 1. Check out the code of *this* repository (`repo-stats`), so we can commit files to it.
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Run the statistics generator action
+      - name: Generate repo traffic stats
+        uses: jgehrcke/github-repo-stats@v2
+        with:
+          # Your PAT, stored in the secret we created
+          github-token: ${{ secrets.GH_PAT }}
+
+          # The repository to fetch data for. `${{ matrix.repo }}` is dynamically
+          # replaced with the repository name for each job run.
+          repository: ${{ matrix.repo }}
+
+          # We create a unique directory for each repo's stats to keep things clean.
+          # For example, stats for 'AmosDinh/snake' will go into './stats-output/AmosDinh_snake/'.
+          svg-export-path: './stats-output/${{ replace(matrix.repo, ''/'', ''_'') }}/'
+          
+          # Optional: Customize the commit message and author
+          commit-message: 'docs: update repository traffic stats'
+          commit-author-name: 'GitHub Actions'
+          commit-author-email: 'actions@github.com'
