@@ -1,21 +1,16 @@
 # .github/workflows/generate-stats.yml
 name: Generate All Repo Stats
 
-# Controls when the action will run
 on:
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-  # Runs the job automatically every Sunday at 05:00 UTC
   schedule:
     - cron: '0 5 * * 0'
 
 jobs:
   build-and-commit:
     runs-on: ubuntu-latest
-    # This is the matrix strategy. It will run one job for each item in the `repo` list.
     strategy:
-      fail-fast: false # IMPORTANT: Ensures that if one repo fails, the others will still run.
+      fail-fast: false
       matrix:
         repo:
           # --- Your list of repositories ---
@@ -65,26 +60,25 @@ jobs:
           - 'AmosDinh/zed_settings'
 
     steps:
-      # 1. Check out the code of *this* repository (`repo-stats`), so we can commit files to it.
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 2. Run the statistics generator action
+      # --- THIS IS THE NEW STEP ---
+      # It replaces the '/' in the repo name with '_' and saves it to an environment variable.
+      - name: Create sanitized repo name for directory path
+        run: echo "SANITIZED_REPO_NAME=$(echo ${{ matrix.repo }} | sed 's/\//_/g')" >> $GITHUB_ENV
+
+      # This step now uses the environment variable created above.
       - name: Generate repo traffic stats
         uses: jgehrcke/github-repo-stats@v2
         with:
-          # Your PAT, stored in the secret we created
           github-token: ${{ secrets.GH_PAT }}
-
-          # The repository to fetch data for. `${{ matrix.repo }}` is dynamically
-          # replaced with the repository name for each job run.
           repository: ${{ matrix.repo }}
-
-          # We create a unique directory for each repo's stats to keep things clean.
-          # For example, stats for 'AmosDinh/snake' will go into './stats-output/AmosDinh_snake/'.
-          svg-export-path: './stats-output/${{ replace(matrix.repo, ''/'', ''_'') }}/'
           
-          # Optional: Customize the commit message and author
+          # --- THIS LINE IS CHANGED ---
+          # Use the sanitized name from the environment variable.
+          svg-export-path: './stats-output/${{ env.SANITIZED_REPO_NAME }}/'
+          
           commit-message: 'docs: update repository traffic stats'
           commit-author-name: 'GitHub Actions'
           commit-author-email: 'actions@github.com'
