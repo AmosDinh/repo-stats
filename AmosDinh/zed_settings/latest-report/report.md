@@ -1,5 +1,5 @@
 % Statistics for AmosDinh/zed_settings
-% Generated for [AmosDinh/zed_settings](https://github.com/AmosDinh/zed_settings) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-06-22 05:46 UTC.
+% Generated for [AmosDinh/zed_settings](https://github.com/AmosDinh/zed_settings) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-06-25 20:27 UTC.
 
 
 ## Views
