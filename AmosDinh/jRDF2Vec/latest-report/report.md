@@ -1,5 +1,5 @@
 % Statistics for AmosDinh/jRDF2Vec
-% Generated for [AmosDinh/jRDF2Vec](https://github.com/AmosDinh/jRDF2Vec) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-07-06 05:36 UTC.
+% Generated for [AmosDinh/jRDF2Vec](https://github.com/AmosDinh/jRDF2Vec) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-07-13 05:39 UTC.
 
 
 ## Views
