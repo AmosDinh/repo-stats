@@ -1,5 +1,5 @@
 % Statistics for AmosDinh/MachineLearningCourse
-% Generated for [AmosDinh/MachineLearningCourse](https://github.com/AmosDinh/MachineLearningCourse) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-07-20 05:44 UTC.
+% Generated for [AmosDinh/MachineLearningCourse](https://github.com/AmosDinh/MachineLearningCourse) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-07-27 05:44 UTC.
 
 
 ## Views
