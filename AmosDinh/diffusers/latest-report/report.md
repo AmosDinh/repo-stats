@@ -1,5 +1,5 @@
 % Statistics for AmosDinh/diffusers
-% Generated for [AmosDinh/diffusers](https://github.com/AmosDinh/diffusers) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-08-03 05:35 UTC.
+% Generated for [AmosDinh/diffusers](https://github.com/AmosDinh/diffusers) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-08-10 05:32 UTC.
 
 
 ## Views
