@@ -1,5 +1,5 @@
 % Statistics for AmosDinh/firecrawl
-% Generated for [AmosDinh/firecrawl](https://github.com/AmosDinh/firecrawl) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-08-10 05:33 UTC.
+% Generated for [AmosDinh/firecrawl](https://github.com/AmosDinh/firecrawl) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-08-17 05:29 UTC.
 
 
 ## Views
