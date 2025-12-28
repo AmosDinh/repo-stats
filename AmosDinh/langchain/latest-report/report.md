@@ -1,5 +1,5 @@
 % Statistics for AmosDinh/langchain
-% Generated for [AmosDinh/langchain](https://github.com/AmosDinh/langchain) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-12-21 05:41 UTC.
+% Generated for [AmosDinh/langchain](https://github.com/AmosDinh/langchain) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2025-12-28 05:44 UTC.
 
 
 ## Views
