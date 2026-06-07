@@ -1,5 +1,5 @@
 % Statistics for AmosDinh/Scrapegraph-ai
-% Generated for [AmosDinh/Scrapegraph-ai](https://github.com/AmosDinh/Scrapegraph-ai) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2026-05-31 08:38 UTC.
+% Generated for [AmosDinh/Scrapegraph-ai](https://github.com/AmosDinh/Scrapegraph-ai) with [jgehrcke/github-repo-stats](https://github.com/jgehrcke/github-repo-stats) at 2026-06-07 08:49 UTC.
 
 
 ## Views
